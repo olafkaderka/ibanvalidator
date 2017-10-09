@@ -77,7 +77,7 @@
   account_number: 10!n
 
 'DE':
-  blz: 8!n
+  bank_code: 8!n
   account_number: 10!n
 
 'DK':
@@ -95,7 +95,10 @@
   check_digits: 2!n
 
 'ES':
-  account_number: 20!n
+  bank_code: 4!n
+  branch_code: 4!n 
+  check_digits: 2!n
+  account_number: 8!n
 
 'FI':
   bank_code: 6!n

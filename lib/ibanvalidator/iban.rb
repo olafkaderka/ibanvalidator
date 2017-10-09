@@ -3,6 +3,20 @@
 module Ibanvalidator
   class IBAN
 
+    #attr_accessor :code, :bank, :country, :location, :branch
+
+    def initialize( code )
+      @code = IBAN.canonicalize_code(code)
+    end
+
+    # The code in canonical form,
+    # suitable for storing in a database
+    # or sending over the wire
+    def code
+      @code
+    end
+
+
     def self.valid?( code, rules = nil )
       new(code).validation_errors(rules).empty?
     end
@@ -20,9 +34,6 @@ module Ibanvalidator
       Conversion.local2iban country_code, data
     end
 
-    def initialize( code )
-      @code = IBAN.canonicalize_code(code)
-    end
 
     def to_local
       Conversion.iban2local country_code, bban
@@ -46,12 +57,6 @@ module Ibanvalidator
       errors
     end
 
-    # The code in canonical form,
-    # suitable for storing in a database
-    # or sending over the wire
-    def code
-      @code
-    end
 
     def country_code
       @code[0..1]
