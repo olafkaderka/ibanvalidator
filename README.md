@@ -38,7 +38,8 @@ Or install it yourself as:
 	iban.country_code => "DE"
 	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
 	iban.check_digits => "89"
-
+	iban.prettify => "DE89 3704 0044 0532 0130 00"
+	
 
 ## Development
 
