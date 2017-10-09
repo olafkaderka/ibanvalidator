@@ -39,7 +39,11 @@ Or install it yourself as:
 	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
 	iban.check_digits => "89"
 	iban.prettify => "DE89 3704 0044 0532 0130 00"
-	
+
+
+	Ibanvalidator.rules, liefert alle IBAN Regeln
+	Ibanvalidator.rule_countries, liefert ein Array mit allen Ländern für die eine Rule hinterlegt ist
+
 
 ## Development
 

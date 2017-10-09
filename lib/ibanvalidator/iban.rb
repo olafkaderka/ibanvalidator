@@ -38,7 +38,7 @@ module Ibanvalidator
 
     # Load and cache the default rules from rules.yml
     def self.default_rules
-      @default_rules ||= IBANRules.defaults
+      Ibanvalidator.default_rules 
     end
 
     def self.from_local(country_code, data)
@@ -64,7 +64,7 @@ module Ibanvalidator
       return [:too_short] if @code.size < 5
       return [:too_long] if @code.size > 34
       return [:bad_chars] unless @code =~ /^[A-Z0-9]+$/
-      errors += validation_errors_against_rules( rules || IBAN.default_rules )
+      errors += validation_errors_against_rules( rules || Ibanvalidator.default_rules )
       errors << :bad_check_digits unless valid_check_digits?
       errors
     end

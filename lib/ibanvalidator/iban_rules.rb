@@ -5,7 +5,7 @@ require 'yaml'
 module Ibanvalidator
 
   class IBANRules
-
+    attr_accessor :rules
     def initialize( rules = {} )
       @rules = rules
     end

@@ -1,6 +1,7 @@
 require "spec_helper"
 require 'ibanvalidator'
 require 'ibanvalidator/iban'
+require 'ibanvalidator/iban_rules'
 
 RSpec.describe Ibanvalidator do
   
@@ -16,6 +17,11 @@ RSpec.describe Ibanvalidator do
   it "IBAN too long" do 
     iv = Ibanvalidator::IBAN.new("ABZDKFSASIFGASBKISFKASBFIHASVFISFGIASBKABSFKASFKACKJASHFS")
     expect(iv.validation_errors).to eq([:too_long])
+  end
+
+
+  it "rules check" do
+     expect(Ibanvalidator::rule_countries).not_to be nil
   end
 
 
@@ -101,7 +107,5 @@ RSpec.describe Ibanvalidator do
         expect(iban.check_digits).to eq("89")
         expect(iban.prettify).to eq("DE89 3704 0044 0532 0130 00")
       end
-
-
 
 end
