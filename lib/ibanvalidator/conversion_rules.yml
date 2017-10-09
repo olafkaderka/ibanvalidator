@@ -16,6 +16,9 @@
 #
 # If a field has more than one kind of character representation, an array can
 # be used (see MU)
+# erweitert Olaf Kaderka
+# https://bank.codes/iban/structure/ukraine/
+# https://bank.codes/iban/structure/brazil/
 #
 
 'AD':
@@ -61,6 +64,11 @@
 'BH':
   bank_code: 4!a
   account_number: 14!c
+# https://bank.codes/iban/structure/brazil/
+'BR':
+  bank_code: 8!n
+  branch_code: 5!n
+  account_number: 12!n
 
 'CH':
   bank_code: 5!n
@@ -319,6 +327,11 @@
   bank_code: 5!n
   reserved: 1!c
   account_number: 16!c
+
+'UA':
+  check_digit: 2!n
+  bank_code: 6!n
+  account_number: 19!c
 
 'VG':
   bank_code: 4!c

@@ -21,9 +21,13 @@ RSpec.describe Ibanvalidator do
 
 
   it "rules check" do
-     expect(Ibanvalidator::rules).not_to be nil
+     expect(Ibanvalidator::default_rules).not_to be nil
      countries = ["AD", "AE", "AL", "AT", "AZ", "BA", "BE", "BG", "BH", "BR", "CH", "CY", "CZ", "DE", "DK", "DO", "EE", "ES", "FI", "FO", "FR", "GB", "GE", "GI", "GL", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MK", "MR", "MT", "MU", "NL", "NO", "PK", "PL", "PT", "PS", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "SM", "TN", "TR", "UA", "VG"]
      expect(Ibanvalidator::rule_countries).to eq(countries)
+     expect(Ibanvalidator.default_conversion_countries).not_to be nil
+     diff = Ibanvalidator::rule_countries - Ibanvalidator.default_conversion_countries
+     #alle laender haben auch eine conversion rule
+     expect(diff).to eq([])
   end
 
 
