@@ -5,7 +5,7 @@ Ibanvalidator ist eine Ruby Library zum überüfen von IBANs. [Mehr Infos zur IB
 Es basiert auf der gem [iban-tools](http://github.com/iulianu/iban-tools) von [Iulianu](http://github.com/iulianu) die dann vom Team
 bei [AlphaSights](https://engineering.alphasights.com) weiterentwickelt wurde.
 
-Wir wollen diese gem weiterpflegen und zusätzliche Funtionen integrieren.
+Wir wollen diese gem weiterpflegen und zusätzliche Funktionen integrieren.
 
 
 ## Installation
@@ -27,22 +27,22 @@ Or install it yourself as:
 ## Usage
 
 ### quick validation
-require 'ibanvalidator'
-Ibanvalidator::IBAN.valid?("DE89370400440532013000") => true
+	require 'ibanvalidator'
+	Ibanvalidator::IBAN.valid?("DE89370400440532013000") => true
 
 ### advanced
-require 'ibanvalidator'
-iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
-iban.code => "DE89370400440532013000"
-iban.bban => "370400440532013000"
-iban.country_code => "DE"
-iban.to_local => {bank_code: '37040044', account_number: '532013000'}
-iban.check_digits => "89"
+	require 'ibanvalidator'
+	iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
+	iban.code => "DE89370400440532013000"
+	iban.bban => "370400440532013000"
+	iban.country_code => "DE"
+	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
+	iban.check_digits => "89"
 
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
