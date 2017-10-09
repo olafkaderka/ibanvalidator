@@ -137,6 +137,13 @@
   bank_code: 4!a
   account_number: 15!c
 
+'GT':
+  # Guatemala https://bank.codes/iban/structure/guatemala/
+  bank_code: 4!a
+  currency: 2!n
+  account_type: 2!n
+  account_number: 16!c
+
 'GL':
   bank_code: 4!n
   account_number: 10!n
@@ -335,3 +342,6 @@
 'VG':
   bank_code: 4!c
   account_number: 16!n
+'XK':
+  bank_code: 4!c
+  account_number: 12!n

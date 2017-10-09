@@ -21,11 +21,9 @@ RSpec.describe Ibanvalidator do
 
 
   it "rules check" do
-     expect(Ibanvalidator::default_rules).not_to be nil
-     countries = ["AD", "AE", "AL", "AT", "AZ", "BA", "BE", "BG", "BH", "BR", "CH", "CY", "CZ", "DE", "DK", "DO", "EE", "ES", "FI", "FO", "FR", "GB", "GE", "GI", "GL", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MK", "MR", "MT", "MU", "NL", "NO", "PK", "PL", "PT", "PS", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "SM", "TN", "TR", "UA", "VG"]
-     expect(Ibanvalidator::rule_countries).to eq(countries)
+     expect(Ibanvalidator.rule_countries).not_to be nil
      expect(Ibanvalidator.default_conversion_countries).not_to be nil
-     diff = Ibanvalidator::rule_countries - Ibanvalidator.default_conversion_countries
+     diff = Ibanvalidator.rule_countries - Ibanvalidator.default_conversion_countries
      #alle laender haben auch eine conversion rule
      expect(diff).to eq([])
   end
@@ -97,6 +95,8 @@ RSpec.describe Ibanvalidator do
       'VG96VPVG0000012345678901' => {bank_code: 'VPVG', account_number: '12345678901'},
       'UA213996220000026007233566001' => {bank_code: '399622', account_number: '26007233566001'},
       'BR9700360305000010009795493P1' => {bank_code: '360305', branch_code: '1', account_number: '9795493'},
+      'GT82TRAJ01020000001210029690' => {:bank_code=>"TRAJ", :currency=>"1", :account_type=>"2", :account_number=>"1210029690"},
+      'XK051212012345678906' => {:bank_code=>"1212", :account_number=>"12345678906"},
     }
 
       IBAN_FOR_TEST.each do |iban,local|
