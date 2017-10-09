@@ -24,7 +24,9 @@ module Ibanvalidator
 	else
 		Ibanvalidator.default_conversions = YAML.load_file(File.join(File.dirname(__FILE__), '/ibanvalidator', 'conversion_rules.yml'))
 	end
-	#Ibanvalidator.default_conversions = (Ibanvalidator.default_conversions ||  YAML.load_file(File.join(File.dirname(__FILE__), '/ibanvalidator', 'conversion_rules.yml'))  )
+
+
+	Ibanvalidator.rule_countries = (Ibanvalidator.rule_countries || Ibanvalidator.default_rules.keys)
 	Ibanvalidator.default_conversion_countries = (Ibanvalidator.default_conversion_countries || Ibanvalidator.default_conversions.keys)
 
 end

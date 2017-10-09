@@ -67,8 +67,8 @@
 # https://bank.codes/iban/structure/brazil/
 'BR':
   bank_code: 8!n
-  branch_code: 5!n
-  account_number: 12!n
+  branch_code: 5!c
+  account_number: 10!c
 
 'CH':
   bank_code: 5!n
@@ -329,7 +329,6 @@
   account_number: 16!c
 
 'UA':
-  check_digit: 2!n
   bank_code: 6!n
   account_number: 19!c
 

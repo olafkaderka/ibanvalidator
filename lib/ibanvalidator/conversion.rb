@@ -100,8 +100,7 @@ module Ibanvalidator
     end
 
     def self.load_config(country_code)
-      default_config = YAML.
-        load_file(File.join(File.dirname(__FILE__), 'conversion_rules.yml'))
+      default_config = Ibanvalidator.default_conversions
       unless default_config.key?(country_code)
         raise ArgumentError, "Country code #{country_code} not availble"
       end

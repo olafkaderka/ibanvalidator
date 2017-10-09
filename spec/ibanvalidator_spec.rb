@@ -95,6 +95,8 @@ RSpec.describe Ibanvalidator do
       'TN5914207207100707129648' => {bank_code: '14', branch_code: '207', account_number: '207100707129648'},
       'TR330006100519786457841326' => {bank_code: '61', reserved: '0', account_number: '519786457841326'},
       'VG96VPVG0000012345678901' => {bank_code: 'VPVG', account_number: '12345678901'},
+      'UA213996220000026007233566001' => {bank_code: '399622', account_number: '26007233566001'},
+      'BR9700360305000010009795493P1' => {bank_code: '360305', branch_code: '1', account_number: '9795493'},
     }
 
       IBAN_FOR_TEST.each do |iban,local|
