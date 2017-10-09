@@ -19,7 +19,8 @@
 # erweitert Olaf Kaderka
 # https://bank.codes/iban/structure/ukraine/
 # https://bank.codes/iban/structure/brazil/
-#
+# https://bank.codes/iban/structure/kosovo/
+# https://bank.codes/iban/structure/guatemala/
 
 'AD':
   bank_code: 4!n
