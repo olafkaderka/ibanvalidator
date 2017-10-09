@@ -1,12 +1,11 @@
 # Ibanvalidator (under Construction)
 
-Ibanvalidator ist eine Ruby Library zum überüfen von IBANs. [Mehr Infos zur IBAN](https://de.wikipedia.org/wiki/IBAN)
+Ibanvalidator ist eine Ruby/Rails Library zum überüfen von IBANs in > 60 Ländern. [Mehr Infos zur IBAN](https://de.wikipedia.org/wiki/IBAN)
 
 Es basiert auf der gem [iban-tools](http://github.com/iulianu/iban-tools) von [Iulianu](http://github.com/iulianu) die dann vom Team
 bei [AlphaSights](https://engineering.alphasights.com) weiterentwickelt wurde.
 
 Wir wollen diese gem weiterpflegen und zusätzliche Funktionen integrieren.
-
 
 ## Installation
 
@@ -42,7 +41,8 @@ Or install it yourself as:
 
 
 	Ibanvalidator.rules, liefert alle IBAN Regeln
-	Ibanvalidator.rule_countries, liefert ein Array mit allen Ländern für die eine Rule hinterlegt ist
+	**Ibanvalidator.rule_countries**, liefert ein Array mit allen Ländern für die eine Rule hinterlegt ist
+	=> ["AD", "AE", "AL", "AT", "AZ", "BA", "BE", "BG", "BH", "BR", "CH", "CY", "CZ", "DE", "DK", "DO", "EE", "ES", "FI", "FO", "FR", "GB", "GE", "GI", "GL", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MK", "MR", "MT", "MU", "NL", "NO", "PK", "PL", "PT", "PS", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "SM", "TN", "TR", "UA", "VG"]
 
 
 ## Development
