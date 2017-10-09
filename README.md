@@ -1,8 +1,12 @@
-# Ibanvalidator under Destruction
+# Ibanvalidator (under Construction)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ibanvalidator`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ibanvalidator ist eine Ruby Library zum überüfen von IBANs. [Mehr Infos zur IBAN](https://de.wikipedia.org/wiki/IBAN)
 
-TODO: Delete this and the text above, and describe your gem
+Es basiert auf der gem [iban-tools](http://github.com/iulianu/iban-tools) von [Iulianu](http://github.com/iulianu) die dann vom Team
+bei [AlphaSights](https://engineering.alphasights.com) weiterentwickelt wurde.
+
+Wir wollen diese gem weiterpflegen und zusätzliche Funtionen integrieren.
+
 
 ## Installation
 
@@ -22,7 +26,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### quick validation
+require 'ibanvalidator'
+Ibanvalidator::IBAN.valid?("DE89370400440532013000") => true
+
+### advanced
+require 'ibanvalidator'
+iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
+iban.code => "DE89370400440532013000"
+iban.bban => "370400440532013000"
+iban.country_code => "DE"
+iban.to_local => {bank_code: '37040044', account_number: '532013000'}
+iban.check_digits => "89"
+
 
 ## Development
 
@@ -38,6 +54,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/olafka
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-## Code of Conduct
 
-Everyone interacting in the Ibanvalidator project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/olafkaderka/ibanvalidator/blob/master/CODE_OF_CONDUCT.md).

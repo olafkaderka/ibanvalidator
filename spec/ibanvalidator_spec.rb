@@ -92,4 +92,15 @@ RSpec.describe Ibanvalidator do
            end
       end
 
+      it "Test Deuschland aus Readme" do
+        iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
+        expect(iban.code).to eq("DE89370400440532013000")
+        expect(iban.country_code).to eq("DE")
+        expect(iban.bban).to eq("370400440532013000")
+        expect(iban.to_local).to eq({bank_code: '37040044', account_number: '532013000'})
+        expect(iban.check_digits).to eq("89")
+      end
+
+
+
 end

@@ -1,5 +1,4 @@
-# vim:ts=2:sw=2:et:
-
+#see https://de.wikipedia.org/wiki/IBAN
 module Ibanvalidator
   class IBAN
 
@@ -14,6 +13,18 @@ module Ibanvalidator
     # or sending over the wire
     def code
       @code
+    end
+
+     def country_code
+      @code[0..1]
+    end
+
+    def check_digits
+      @code[2..3]
+    end
+
+    def bban
+      @code[4..-1]
     end
 
 
@@ -39,6 +50,15 @@ module Ibanvalidator
       Conversion.iban2local country_code, bban
     end
 
+    def to_s
+      "#<#{self.class}: #{prettify}>"
+    end
+
+    # The IBAN code in a human-readable format
+    def prettify
+      @code.gsub(/(.{4})/, '\1 ').strip
+    end
+
     def validation_errors( rules = nil )
       errors = []
       return [:too_short] if @code.size < 5
@@ -49,6 +69,7 @@ module Ibanvalidator
       errors
     end
 
+
     def validation_errors_against_rules( rules )
       errors = []
       return [:unknown_country_code] if rules[country_code].nil?
@@ -58,23 +79,18 @@ module Ibanvalidator
     end
 
 
-    def country_code
-      @code[0..1]
-    end
-
-    def check_digits
-      @code[2..3]
-    end
-
-    def bban
-      @code[4..-1]
-    end
-
+    ########### Pruefdsummen siehe https://de.wikipedia.org/wiki/IBAN#Validierung_der_Pr.C3.BCfsum
+    #Nun wird der Rest berechnet, der sich beim ganzzahligen Teilen der Zahl durch 97 ergibt (Modulo 97).
     def valid_check_digits?
+      ##Das Ergebnis muss 1 sein, ansonsten ist die IBAN falsch.
       numerify.to_i % 97 == 1
     end
 
     def numerify
+      #Diese setzt sich aus 
+      #BBAN (in Deutschland z. B. 18 Stellen) + Länderkürzel kodiert + Prüfsumme zusammen. 
+      #Dabei werden die beiden Buchstaben des Länderkürzels sowie weitere etwa in der Kontonummer enthaltene Buchstaben durch ihre Position im lateinischen Alphabet + 9 ersetzt 
+      #(A = 10, B = 11, …, Z = 35).
       numerified = ""
       (@code[4..-1] + @code[0..3]).each_byte do |byte|
         numerified += case byte
@@ -89,13 +105,7 @@ module Ibanvalidator
       numerified
     end
 
-    def to_s
-      "#<#{self.class}: #{prettify}>"
-    end
+    ######################## Pruefsummen
 
-    # The IBAN code in a human-readable format
-    def prettify
-      @code.gsub(/(.{4})/, '\1 ').strip
-    end
   end
 end
