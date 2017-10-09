@@ -1,4 +1,4 @@
-module IBANTools
+module Ibanvalidator
   class Conversion
 
     def self.local2iban(country_code, data)

@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-module IBANTools
+module Ibanvalidator
 
   class IBANRules
 

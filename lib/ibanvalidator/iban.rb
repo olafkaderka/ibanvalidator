@@ -1,6 +1,6 @@
 # vim:ts=2:sw=2:et:
 
-module IBANTools
+module Ibanvalidator
   class IBAN
 
     def self.valid?( code, rules = nil )
@@ -31,6 +31,7 @@ module IBANTools
     def validation_errors( rules = nil )
       errors = []
       return [:too_short] if @code.size < 5
+      return [:too_long] if @code.size > 34
       return [:bad_chars] unless @code =~ /^[A-Z0-9]+$/
       errors += validation_errors_against_rules( rules || IBAN.default_rules )
       errors << :bad_check_digits unless valid_check_digits?
