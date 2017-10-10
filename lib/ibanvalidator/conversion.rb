@@ -22,7 +22,7 @@ module Ibanvalidator
     end
 
 
-    def self.iban2local(country_code, bban, ignore_zero = true)
+    def self.iban2local(country_code, bban, leading_zero = false)
       config = load_config country_code
 
 
@@ -36,7 +36,7 @@ module Ibanvalidator
           ret
         end.join('')
         #entefernen von führenden nullen
-        local[key.to_sym].sub!(/^0+/, '') if ignore_zero
+        local[key.to_sym].sub!(/^0+/, '') if !leading_zero
         local[key.to_sym] = '0' if local[key.to_sym] == ''
       end
       local

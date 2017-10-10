@@ -40,13 +40,17 @@ Or install it yourself as:
 	iban.prettify => "DE89 3704 0044 0532 0130 00"	
 	iban.sepa_scheme? => true
 
+## converting iban => to_local
+	iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
 	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
 	
+	Steuerung der Ausgabe der führenden Nullen (Leading Zero true/false , standard => false)
+
 	iban = Ibanvalidator::IBAN.new("ES9121000418450200051332")
-	iban.to_local => {:bank_code=>"2100", :branch_code=>"418", :check_digits=>"45", :account_number=>"2000513"} => ohne führende Nullen
+	iban.to_local => {:bank_code=>"2100", :branch_code=>"418", :check_digits=>"45", :account_number=>"2000513"} => ohne führende Nullen, leading_zero = false
 
 	mit führenden Nullen / Leading Zero:
-	iban.to_local(false) => {:bank_code=>"2100", :branch_code=>"0418", :check_digits=>"45", :account_number=>"02000513"} => mit führende Nullen
+	iban.to_local(true) => {:bank_code=>"2100", :branch_code=>"0418", :check_digits=>"45", :account_number=>"02000513"} => mit führende Nullen, leading_zero = true
 	
 
 ### errors
