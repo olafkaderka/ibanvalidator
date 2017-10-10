@@ -36,6 +36,8 @@ Gem::Specification.new do |spec|
 
   #for mattr_accessor
   spec.add_dependency "activesupport"
-
+ 
+  spec.add_dependency 'activemodel'
   
+
 end

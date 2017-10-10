@@ -9,15 +9,6 @@ RSpec.describe Ibanvalidator do
     expect(Ibanvalidator::VERSION).not_to be nil
   end
 
-  it "IBAN too short" do 
-    iv = Ibanvalidator::IBAN.new("ABZD")
-    expect(iv.validation_errors).to eq([:too_short])
-  end
-
-  it "IBAN too long" do 
-    iv = Ibanvalidator::IBAN.new("ABZDKFSASIFGASBKISFKASBFIHASVFISFGIASBKABSFKASFKACKJASHFS")
-    expect(iv.validation_errors).to eq([:too_long])
-  end
 
 
   it "rules check" do
@@ -27,6 +18,65 @@ RSpec.describe Ibanvalidator do
      #alle laender haben auch eine conversion rule
      expect(diff).to eq([])
   end
+
+
+  class Model
+      include ActiveModel::Validations
+      attr_accessor :iban
+      validates :iban, iban_model: true
+      def initialize(iban)
+        @iban = iban
+      end
+  end
+  
+  it 'ABZD is toot_short' do
+      I18n.locale = :en
+      model = Model.new 'ABZD'
+      model.valid?
+      expect(model.errors.count).to eq(1)
+      expect(model.errors.messages).to eq({:iban=>["too_short"]})
+
+      I18n.locale = :de
+      model = Model.new 'ABZE'
+      model.valid?
+      expect(model.errors.messages).to eq({:iban=>["zu wenig Zeichen"]})
+  end
+
+
+  it "IBAN too short" do 
+    iv = Ibanvalidator::IBAN.new("ABZD")
+    expect(iv.validation_errors).to eq([:iban_too_short])
+    expect !iv.valid?
+  end
+
+  it "IBAN too long" do 
+    iv = Ibanvalidator::IBAN.new("ABZDKFSASIFGASBKISFKASBFIHASVFISFGIASBKABSFKASFKACKJASHFS")
+    expect(iv.validation_errors).to eq([:iban_too_long])
+    expect !iv.valid?
+  end
+
+  it "IBAN bad_chars" do 
+    iv = Ibanvalidator::IBAN.new("ABZDKFSASIFÄÄÄÄÄ")
+    expect(iv.validation_errors).to eq([:iban_bad_chars])
+    expect !iv.valid?
+  end
+
+
+  it "Test Deuschland aus Readme" do
+        iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
+        expect(iban.code).to eq("DE89370400440532013000")
+        expect(iban.country_code).to eq("DE")
+        expect(iban.bban).to eq("370400440532013000")
+        expect(iban.to_local).to eq({bank_code: '37040044', account_number: '532013000'})
+        expect(iban.check_digits).to eq("89")
+        expect(iban.prettify).to eq("DE89 3704 0044 0532 0130 00")
+        expect iban.sepa_scheme?
+        expect iban.valid?
+
+        expect Ibanvalidator::IBAN.new("DE89370 40044053201 3000").valid?
+  end
+
+
 
 
   IBAN_FOR_TEST = {
@@ -103,18 +153,9 @@ RSpec.describe Ibanvalidator do
            it "returns valid local data for #{iban}" do
             iv = Ibanvalidator::IBAN.new(iban)
             expect(iv.to_local).to eq(local)
+            expect iv.valid?
            end
       end
 
-      it "Test Deuschland aus Readme" do
-        iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
-        expect(iban.code).to eq("DE89370400440532013000")
-        expect(iban.country_code).to eq("DE")
-        expect(iban.bban).to eq("370400440532013000")
-        expect(iban.to_local).to eq({bank_code: '37040044', account_number: '532013000'})
-        expect(iban.check_digits).to eq("89")
-        expect(iban.prettify).to eq("DE89 3704 0044 0532 0130 00")
-        expect iban.sepa_scheme?
-      end
 
 end

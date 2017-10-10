@@ -1,9 +1,12 @@
 require 'active_support'
 require 'active_support/core_ext'
+require 'active_model'
+
 require "ibanvalidator/version"
 require 'ibanvalidator/conversion.rb'
 require 'ibanvalidator/iban.rb'
 require 'ibanvalidator/iban_rules.rb'
+require 'ibanvalidator/iban_model_validator.rb'
 
 module Ibanvalidator
 	mattr_accessor :default_rules #all rules from yaml file 'rules'
@@ -32,3 +35,7 @@ module Ibanvalidator
  
 
 end
+
+ActiveModel::Validations.send(:include, Ibanvalidator)
+I18n.load_path += Dir[File.expand_path(File.join(File.dirname(__FILE__),'/locales', '*.yml')).to_s]
+

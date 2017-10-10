@@ -2,10 +2,24 @@
 module Ibanvalidator
   class IBAN
 
-    #attr_accessor :code, :bank, :country, :location, :branch
+    attr_accessor :errors
+
+    #quick_check Ibanvalidator::IBAN.valid?("DE89370400440532013000")
+    def self.valid?( code, rules = nil )
+      new(code).valid?(rules)
+    end
 
     def initialize( code )
       @code = IBAN.canonicalize_code(code)
+    end
+
+    def errors(rules = nil)
+      @errors ||= self.validation_errors(rules)
+    end
+
+    #instanz
+    def valid?(rules = nil)
+      errors(rules).empty?
     end
 
     # The code in canonical form,
@@ -27,14 +41,11 @@ module Ibanvalidator
       @code[4..-1]
     end
 
+
     def sepa_scheme?
       Ibanvalidator.sepa_countries.include? country_code
     end
 
-
-    def self.valid?( code, rules = nil )
-      new(code).validation_errors(rules).empty?
-    end
 
     def self.canonicalize_code( code )
       code.to_s.strip.gsub(/\s+/, '').upcase
@@ -65,23 +76,22 @@ module Ibanvalidator
 
     def validation_errors( rules = nil )
       errors = []
-      return [:too_short] if @code.size < 5
-      return [:too_long] if @code.size > 34
-      return [:bad_chars] unless @code =~ /^[A-Z0-9]+$/
+      return [:iban_too_short] if @code.size < 5
+      return [:iban_too_long] if @code.size > 34
+      return [:iban_bad_chars] unless @code =~ /^[A-Z0-9]+$/
       errors += validation_errors_against_rules( rules || Ibanvalidator.default_rules )
-      errors << :bad_check_digits unless valid_check_digits?
+      errors << :iban_bad_check_digits unless valid_check_digits?
       errors
     end
 
 
     def validation_errors_against_rules( rules )
       errors = []
-      return [:unknown_country_code] if rules[country_code].nil?
-      errors << :bad_length if rules[country_code]["length"] != @code.size
-      errors << :bad_format unless bban =~ rules[country_code]["bban_pattern"]
+      return [:iban_unknown_country_code] if rules[country_code].nil?
+      errors << :iban_bad_length if rules[country_code]["length"] != @code.size
+      errors << :iban_bad_format unless bban =~ rules[country_code]["bban_pattern"]
       errors
     end
-
 
     ########### Pruefdsummen siehe https://de.wikipedia.org/wiki/IBAN#Validierung_der_Pr.C3.BCfsum
     #Nun wird der Rest berechnet, der sich beim ganzzahligen Teilen der Zahl durch 97 ergibt (Modulo 97).

@@ -32,6 +32,7 @@ Or install it yourself as:
 ### advanced
 	require 'ibanvalidator'
 	iban = Ibanvalidator::IBAN.new("DE89370 40044053201 3000")
+	iban.valid? => true
 	iban.code => "DE89370400440532013000"
 	iban.bban => "370400440532013000"
 	iban.country_code => "DE"

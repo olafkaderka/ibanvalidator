@@ -1,0 +1,10 @@
+de:
+  errors:
+    messages:
+      iban_too_short: zu wenig Zeichen
+      iban_too_long: zu viel Zeichen
+      iban_bad_chars: ungültige Zeichen
+      iban_unknown_country_code: Land nicht unterstütz
+      iban_bad_length: falsche Länge
+      iban_bad_format: Formatfehler
+      iban_bad_check_digits: falsche Kontrollziffer

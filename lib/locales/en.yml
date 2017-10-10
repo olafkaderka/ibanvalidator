@@ -1,0 +1,10 @@
+en:
+  errors:
+    messages:
+      iban_too_short: too_short
+      iban_too_long: too_long
+      iban_bad_chars: bad characters
+      iban_unknown_country_code: country not supported
+      iban_bad_length: bad length
+      iban_bad_format: fromat error
+      iban_bad_check_digits: bad check digit
