@@ -114,6 +114,7 @@ RSpec.describe Ibanvalidator do
         expect(iban.to_local).to eq({bank_code: '37040044', account_number: '532013000'})
         expect(iban.check_digits).to eq("89")
         expect(iban.prettify).to eq("DE89 3704 0044 0532 0130 00")
+        expect iban.sepa_scheme?
       end
 
 end

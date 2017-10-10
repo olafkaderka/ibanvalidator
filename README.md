@@ -37,12 +37,19 @@ Or install it yourself as:
 	iban.country_code => "DE"
 	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
 	iban.check_digits => "89"
-	iban.prettify => "DE89 3704 0044 0532 0130 00"
+	iban.prettify => "DE89 3704 0044 0532 0130 00"	
+	iban.sepa_scheme? => true
+
 
 
 	Ibanvalidator.default_rules, liefert alle IBAN Regeln
 	**Ibanvalidator.rule_countries**, liefert ein Array mit allen Ländern für die eine Rule hinterlegt ist
 	=> ["AD", "AE", "AL", "AT", "AZ", "BA", "BE", "BG", "BH", "BR", "CH", "CY", "CZ", "DE", "DK", "DO", "EE", "ES", "FI", "FO", "FR", "GB", "GE", "GI", "GL", "GR", "HR", "HU", "IE", "IL", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MK", "MR", "MT", "MU", "NL", "NO", "PK", "PL", "PT", "PS", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "SM", "TN", "TR", "UA", "VG"]
+
+	**Ibanvalidator.sepa_countries** liefert alle Länder die im Sepa Raum liegen
+	
+
+
 
 
 

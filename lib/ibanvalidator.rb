@@ -10,6 +10,7 @@ module Ibanvalidator
 	mattr_accessor :rule_countries ##country_keys from default_rules
 	mattr_accessor :default_conversions ##all rules from yaml file 'conversion_rules'
 	mattr_accessor :default_conversion_countries #country_keys from default_conversions
+	mattr_accessor :sepa_countries #country_keys for sepa countries
 
 
 	#falls noch nciht gesetzt zb in einem initializer.....
@@ -24,5 +25,10 @@ module Ibanvalidator
 
 	Ibanvalidator.rule_countries = (Ibanvalidator.rule_countries || Ibanvalidator.default_rules.keys)
 	Ibanvalidator.default_conversion_countries = (Ibanvalidator.default_conversion_countries || Ibanvalidator.default_conversions.keys)
+
+
+	
+	Ibanvalidator.sepa_countries = ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK", "SM", "GI", "GF", "GP", "GG", "IS", "IM", "JE", "MQ", "YT", "RE", "BL", "MF", "PM"]
+ 
 
 end

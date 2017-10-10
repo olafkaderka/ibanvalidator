@@ -27,6 +27,10 @@ module Ibanvalidator
       @code[4..-1]
     end
 
+    def sepa_scheme?
+      Ibanvalidator.sepa_countries.include? country_code
+    end
+
 
     def self.valid?( code, rules = nil )
       new(code).validation_errors(rules).empty?
