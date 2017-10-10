@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Olaf Kaderka"]
   spec.email         = ["okaderka@yahoo.de"]
 
-  spec.summary       = %q{Validate IBAN numbers based on iban-tool}
+  spec.summary       = %q{Validates and convert IBAN numbers, +60 countries, incl. Active Model Validator...}
   spec.description   = %q{}
   spec.homepage      = "https://github.com/olafkaderka/ibanvalidator"
   spec.license       = "MIT"

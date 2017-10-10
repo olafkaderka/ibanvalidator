@@ -1,4 +1,4 @@
-# Ibanvalidator (under Construction)
+# Ibanvalidator
 
 Ibanvalidator ist eine Ruby/Rails Library zum überüfen von IBANs in > 60 Ländern. [Mehr Infos zur IBAN](https://de.wikipedia.org/wiki/IBAN)
 
