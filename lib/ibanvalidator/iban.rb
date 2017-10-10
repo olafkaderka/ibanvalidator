@@ -60,9 +60,9 @@ module Ibanvalidator
       Conversion.local2iban country_code, data
     end
 
-
-    def to_local
-      Conversion.iban2local country_code, bban
+    #mit ignore_zero fasle werdnen die führenden nullen mit ausgegeben
+    def to_local(ignore_zero=true)
+      Conversion.iban2local country_code, bban, ignore_zero
     end
 
     def to_s

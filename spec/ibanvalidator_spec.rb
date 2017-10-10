@@ -76,6 +76,17 @@ RSpec.describe Ibanvalidator do
         expect Ibanvalidator::IBAN.new("DE89370 40044053201 3000").valid?
   end
 
+  it "Test Spanien mit führenden nullen, ignore_zero => false" do
+        iban = Ibanvalidator::IBAN.new("ES9121000418450200051332")
+        expect(iban.code).to eq("ES9121000418450200051332")
+        expect(iban.country_code).to eq("ES")
+        expect(iban.bban).to eq("21000418450200051332")
+        expect(iban.to_local(false)).to eq({:bank_code=>"2100", :branch_code=>"0418", :check_digits=>"45", :account_number=>"02000513"})
+        expect(iban.check_digits).to eq("91")
+        expect(iban.prettify).to eq("ES91 2100 0418 4502 0005 1332")
+        expect iban.sepa_scheme?
+        expect iban.valid?
+  end
 
 
 

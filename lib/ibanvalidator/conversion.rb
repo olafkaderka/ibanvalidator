@@ -22,8 +22,10 @@ module Ibanvalidator
     end
 
 
-    def self.iban2local(country_code, bban)
+    def self.iban2local(country_code, bban, ignore_zero = true)
       config = load_config country_code
+
+
 
       local = {}
       config.map do |key, values|
@@ -33,7 +35,8 @@ module Ibanvalidator
           bban.sub! regexp, ''
           ret
         end.join('')
-        local[key.to_sym].sub!(/^0+/, '')
+        #entefernen von führenden nullen
+        local[key.to_sym].sub!(/^0+/, '') if ignore_zero
         local[key.to_sym] = '0' if local[key.to_sym] == ''
       end
       local
