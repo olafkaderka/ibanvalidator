@@ -36,14 +36,24 @@ Or install it yourself as:
 	iban.code => "DE89370400440532013000"
 	iban.bban => "370400440532013000"
 	iban.country_code => "DE"
-	iban.to_local => {bank_code: '37040044', account_number: '532013000'}
 	iban.check_digits => "89"
 	iban.prettify => "DE89 3704 0044 0532 0130 00"	
 	iban.sepa_scheme? => true
 
+	iban.to_local => {bank_code: '37040044', account_number: '532013000'} => standarmässig ohne führende Null
+	
+	iban = Ibanvalidator::IBAN.new("ES9121000418450200051332")
+	iban.to_local => {:bank_code=>"2100", :branch_code=>"418", :check_digits=>"45", :account_number=>"2000513"} => ohne führende Nullen
+	iban.to_local**(false)** => {:bank_code=>"2100", :branch_code=>"0418", :check_digits=>"45", :account_number=>"02000513"} => mit führende Nullen
+	
+
+### erroors
 	iban.errors => liefert ein array mit den möglichen Fehlern
 	* :iban_too_short, :iban_too_short, :iban_bad_chars => sind grundsätzliche Fehler
 	* :iban_unknown_country_code, :iban_bad_length, :iban_bad_format, :iban_bad_check_digits => sind Regel-Fehler (also landesspezifisch) 
+
+
+## Constants/Initits
 
 	**Ibanvalidator.default_rules** => liefert alle IBAN Regeln
 
