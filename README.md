@@ -49,7 +49,20 @@ Or install it yourself as:
 
 	**Ibanvalidator.sepa_countries** liefert alle Länder die im Sepa Raum liegen
 	
+### ActiveRecord/Model Validator
+Man kann auch den Model Validator einbinden. Die Felhermeldung sind übersetzt in deutsch und englisch siehe /locales
 
+	validates :iban, iban_model: true
+	de:
+  		errors:
+    		messages:
+      			iban_too_short: zu wenig Zeichen
+      			iban_too_long: zu viel Zeichen
+      			iban_bad_chars: ungültige Zeichen
+      			iban_unknown_country_code: Land nicht unterstütz
+      			iban_bad_length: falsche Länge
+      			iban_bad_format: Formatfehler
+      			iban_bad_check_digits: falsche Kontrollziffer
 
 
 
