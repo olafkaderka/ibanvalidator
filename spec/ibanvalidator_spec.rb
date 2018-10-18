@@ -80,6 +80,27 @@ RSpec.describe Ibanvalidator do
         iban = Ibanvalidator::IBAN.new("ES9121000418450200051332")
         expect(iban.to_local).to eq({:bank_code=>"2100", :branch_code=>"418", :check_digits=>"45", :account_number=>"2000513"})
         expect(iban.to_local(true)).to eq({:bank_code=>"2100", :branch_code=>"0418", :check_digits=>"45", :account_number=>"02000513"})
+        expect(iban.locale_bank_code).to eq("21000418")
+
+  end
+
+  it "DE23 2004 1133 0008 3033 07" do
+    iban = Ibanvalidator::IBAN.new("DE23 2004 1133 0008 3033 07")
+    expect(iban.to_local).to eq({:bank_code=>"20041133", :account_number=>"8303307"})
+    expect iban.valid?
+    
+    iban = Ibanvalidator::IBAN.new("DE23 2004 1133 0830 3307 00")
+    expect(iban.to_local).to eq({:bank_code=>"20041133", :account_number=>"830330700"})
+    expect iban.valid?
+    
+    
+    #https://de.wikipedia.org/wiki/IBAN#Online-Validierung
+    #Ein Nachteil dieses Dienstes ist, dass auch die IBAN DE23 2004 1133 0008 3033 07 
+    #fälschlicherweise als korrekt erkannt wird. 
+    #Das Konto 8303307 bei der Bank mit der BLZ 20041133 hat in Wirklichkeit noch eine zweistellige Unterkontonummer, 
+    #die nur in der IBAN sichtbar wird. 
+    #In diesem Fall lautet die IBAN also DE65 2004 1133 0830 3307 00. 
+    #Wegen solcher Tücken bieten einige Anbieter von kommerziellen Online-IBAN-Validierungen und -Berechnungen Korrektheitsgarantien an.
   end
 
 

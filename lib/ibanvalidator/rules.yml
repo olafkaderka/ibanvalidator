@@ -161,7 +161,7 @@
   bban_pattern: '\d{22}'
 
 'IT':
-  # Italy
+  # Italy IT 60 X 05428 11101 000000123456
   length: 27
   bban_pattern: '[A-Z]\d{10}[A-Z0-9]{12}'
 
